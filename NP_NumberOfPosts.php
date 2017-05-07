@@ -35,14 +35,7 @@ class NP_NumberOfPosts extends NucleusPlugin {
     }
  
     //put in support for SqlTablePrefix, needed in 2.0
-    function supportsFeature($feature) {
-        switch($feature) {
-            case 'SqlTablePrefix':
-                return 1;
-            default:
-                return 0;
-        }
-    }
+    function supportsFeature($what) {return in_array($what,array('SqlTablePrefix','SqlApi'));}
  
     function install() { 
         $this->createOption('head_format','Header formatting','textarea','<ul>');
@@ -87,7 +80,7 @@ class NP_NumberOfPosts extends NucleusPlugin {
                   and c.bshortname = "'.$shName.'" ';
  
         $total_numPosts = sql_query($query_total);
-        $total_row = mysql_fetch_object($total_numPosts);
+        $total_row = sql_fetch_object($total_numPosts);
         $total_num = $total_row->total; 
  
 	// Header
@@ -110,7 +103,7 @@ class NP_NumberOfPosts extends NucleusPlugin {
         $numPosts = sql_query($query);
  
         // outputs list   
-        while($row = mysql_fetch_object($numPosts)) {
+        while($row = sql_fetch_object($numPosts)) {
             $catLink = createCategoryLink($row->catid,'');
             $catName  = $row->cname;
  
