@@ -1,4 +1,4 @@
-<?
+<?php
  
 /**
   * Nucleus Plugin -- NP_NumberOfPosts
@@ -123,4 +123,3 @@ class NP_NumberOfPosts extends NucleusPlugin {
     }
  
 }
-?>
